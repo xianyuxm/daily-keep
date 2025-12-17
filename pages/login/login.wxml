@@ -1,0 +1,14 @@
+<view class="login-page">
+  <view class="hero">
+    <view class="brand">每日记录</view>
+    <view class="subtitle">简单而有质感的每日生活日志</view>
+  </view>
+  <view class="card">
+    <view class="card-title">登录账号</view>
+    <input class="input" value="{{username}}" placeholder="请输入用户名" bindinput="onUserInput" />
+    <input class="input" value="{{password}}" password="true" placeholder="请输入密码" bindinput="onPassInput" />
+    <button class="primary-btn" bindtap="onLogin">登录</button>
+    <button class="ghost-btn" bindtap="onRegister">注册新账号</button>
+  </view>
+  <view class="footer">© 2025 你的团队 | 让记录更简单</view>
+</view>

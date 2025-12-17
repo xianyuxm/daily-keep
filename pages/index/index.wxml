@@ -1,0 +1,72 @@
+<view class="container">
+  <view class="section">
+    <view class="title">日期</view>
+    <picker mode="date" value="{{date}}" bindchange="onDateChange">
+      <view>{{date}}</view>
+    </picker>
+  </view>
+  <view class="section">
+    <view class="title">标题</view>
+    <input value="{{title}}" placeholder="输入记录标题" bindinput="onTitleInput" maxlength="50"></input>
+  </view>
+  <view class="section">
+    <view class="title">天气</view>
+    <view class="weather-row">
+      <picker mode="selector" range="{{weatherOptions}}" value="{{weatherIndex}}" bindchange="onWeatherSelect">
+        <view class="weather-pill">{{weather || weatherOptions[weatherIndex]}}</view>
+      </picker>
+      <input class="temp-input" type="number" value="{{temperature}}" placeholder="温度(℃)" bindinput="onTempInput" maxlength="3" />
+    </view>
+  </view>
+  <view class="section">
+    <view class="title">内容</view>
+    <view class="content-summary" bindtap="openTextModal">
+      <block wx:if="{{!text || !text.length}}">
+        <view class="placeholder">点击编辑内容</view>
+      </block>
+      <block wx:else>
+        <rich-text class="summary-rich" nodes="{{previewNodes}}"></rich-text>
+        <view class="summary-mask"></view>
+      </block>
+    </view>
+  </view>
+  <view class="section">
+    <view class="title">图片</view>
+    <view class="images">
+      <block wx:for="{{photos}}" wx:key="*this">
+        <view class="img-item">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <button class="btn secondary" size="mini" data-path="{{item}}" bindtap="onRemovePhoto">移除</button>
+        </view>
+      </block>
+      <view class="img-item add" bindtap="onChooseImage">
+        <text class="plus">＋</text>
+      </view>
+    </view>
+  </view>
+  <view class="modal" wx:if="{{showTextModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">编辑内容（支持 Markdown）</text>
+        <button class="icon-btn close" bindtap="closeTextModal">×</button>
+      </view>
+      <view class="segmented">
+        <button class="seg-btn {{tab==='edit' ? 'active' : ''}}" data-tab="edit" bindtap="setTab">编辑</button>
+        <button class="seg-btn {{tab==='preview' ? 'active' : ''}}" data-tab="preview" bindtap="setTab">预览</button>
+      </view>
+      <view wx:if="{{tab==='edit'}}">
+        <textarea class="modal-textarea" value="{{text}}" bindinput="onTextInput" maxlength="2000" auto-height></textarea>
+      </view>
+      <view wx:if="{{tab==='preview'}}" class="preview-area">
+        <rich-text nodes="{{previewNodes}}"></rich-text>
+      </view>
+      <view class="modal-actions">
+        <button class="finish-btn" bindtap="closeTextModal">完成</button>
+      </view>
+    </view>
+  </view>
+  <view class="section">
+    <button class="btn" bindtap="onSave">保存</button>
+    <navigator url="/pages/calendar/calendar" open-type="switchTab"><button class="btn secondary" style="margin-top:12rpx;">返回日历</button></navigator>
+  </view>
+</view>

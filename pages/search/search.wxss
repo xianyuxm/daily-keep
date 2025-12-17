@@ -1,0 +1,19 @@
+@import "../../app.wxss";
+.item {
+  padding: 16rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.meta {
+  display: flex;
+  gap: 16rpx;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.date {
+  font-size: 28rpx;
+  color: #111111;
+}
+.desc {
+  font-size: 26rpx;
+  color: #666666;
+}

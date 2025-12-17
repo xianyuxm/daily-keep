@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="calendar-header">
+    <view class="left">
+      <picker mode="selector" range="{{yearOptions}}" value="{{yearIndex}}" bindchange="onYearSelect">
+        <view class="month">{{year}}年</view>
+      </picker>
+      <picker mode="selector" range="{{monthOptions}}" value="{{monthIndex}}" bindchange="onMonthSelect">
+        <view class="month">{{month}}月</view>
+      </picker>
+    </view>
+    <view class="right">
+      <button class="nav-btn" size="mini" bindtap="onPrevMonth">‹</button>
+      <button class="nav-btn" size="mini" bindtap="onNextMonth">›</button>
+      <button class="login-btn" size="mini" bindtap="onLoginTap" wx:if="{{!isLogin}}">登录</button>
+      <button class="login-btn danger" size="mini" bindtap="onLogoutTap" wx:if="{{isLogin}}">退出</button>
+    </view>
+  </view>
+  <view class="weekday-row">
+    <text>日</text><text>一</text><text>二</text><text>三</text><text>四</text><text>五</text><text>六</text>
+  </view>
+  <view class="calendar-grid">
+    <block wx:for="{{weeks}}" wx:key="*this">
+      <view class="week">
+        <block wx:for="{{item}}" wx:key="*this">
+          <navigator url="/pages/index/index?date={{item.date}}">
+            <view class="day {{item.has ? 'has' : ''}} {{item.isToday ? 'today' : ''}}">
+              <text class="num">{{item.day}}</text>
+              <view class="dot" wx:if="{{item.has}}"></view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </block>
+  </view>
+  <view class="stats">
+    <text>本月记录：{{stats.totalDays}} 天</text>
+  </view>
+</view>

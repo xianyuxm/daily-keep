@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="section">
+    <view class="title">记录列表</view>
+    <block wx:for="{{list}}" wx:key="id">
+      <navigator url="/pages/index/index?date={{item.date}}">
+        <view class="item">
+          <view class="meta">
+            <text class="date">{{item.date}}</text>
+            <text class="desc" wx:if="{{item.title}}">{{item.title}}</text>
+            <text class="desc">{{item.text ? item.text.slice(0, 30) : ''}}</text>
+          </view>
+          <view class="thumbs">
+            <block wx:for="{{item.photos}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill"></image>
+            </block>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</view>

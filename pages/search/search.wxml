@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="section">
+    <view class="title">关键词</view>
+    <input value="{{keyword}}" placeholder="输入关键字" bindinput="onKeywordInput" />
+  </view>
+  <view class="section">
+    <view class="title">日期范围</view>
+    <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange"><view>开始：{{startDate}}</view></picker>
+    <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange"><view>结束：{{endDate}}</view></picker>
+  </view>
+  <view class="section">
+    <button class="btn" bindtap="onSearch">搜索</button>
+  </view>
+  <view class="section">
+    <view class="title">结果</view>
+    <block wx:for="{{results}}" wx:key="id">
+      <navigator url="/pages/index/index?date={{item.date}}">
+        <view class="item">
+          <view class="meta">
+            <text class="date">{{item.date}}</text>
+            <text class="desc" wx:if="{{item.title}}">{{item.title}}</text>
+            <text class="desc">{{item.text ? item.text.slice(0, 30) : ''}}</text>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</view>

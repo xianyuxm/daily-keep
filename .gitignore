@@ -1,0 +1,3 @@
+server/data/wx.lock.db
+server/data/wx.mv.db
+server/data/wx.trace.db
